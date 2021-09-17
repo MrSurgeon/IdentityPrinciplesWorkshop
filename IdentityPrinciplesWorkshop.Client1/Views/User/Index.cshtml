@@ -1,0 +1,66 @@
+﻿@using Microsoft.AspNetCore.Authentication
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User</title>
+    <style>
+
+        h3, h4 {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <a asp-action="Signout">Sign Out</a>
+    <a asp-action="RefreshTokens">Refresh Token</a>
+    <h3>@($"{User.Identity.Name}")Kullanıcı sayfasına hoş geldiniz !</h3>
+
+    <h4>Claim Verileri</h4>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Claim Type</th>
+                <th>Claim Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in User.Claims)
+            {
+                <tr>
+                    <td>@claim.Type</td>
+                    <td>@claim.Value</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h4>Auth Prop Verileri</h4>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Auth Prop Type</th>
+                <th>Auth Prop Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in (await Context.AuthenticateAsync()).Properties.Items)
+            {
+                <tr>
+                    <td>@item.Key</td>
+                    <td>@item.Value</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
+
+
+
+
+<
+
+
